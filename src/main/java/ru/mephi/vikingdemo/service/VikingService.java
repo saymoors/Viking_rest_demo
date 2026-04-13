@@ -32,10 +32,16 @@ public class VikingService {
     }
 
     public Viking createViking(String name, int age, int heightCm, HairColor hairColor, BeardStyle beardStyle, List<EquipmentItem> equipment) {
-        System.out.println(0);
         Viking viking = new Viking(name, age, heightCm, hairColor, beardStyle, equipment);
-        System.out.println(1);
         vikings.add(viking);
         return viking;
+    }
+
+    public int removeViking(int index) {
+        if (index < 0 || index >= vikings.size()) {
+            throw new IndexOutOfBoundsException("Такого викинга нет");
+        }
+        vikings.remove(index);
+        return index;
     }
 }

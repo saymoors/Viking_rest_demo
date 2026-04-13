@@ -61,4 +61,9 @@ public class VikingController {
                 viking.equipment()
         );
     }
+
+    @DeleteMapping()
+    public void deleteViking(@RequestParam int index) {
+        vikingListener.delete(index);
+    }
 }
