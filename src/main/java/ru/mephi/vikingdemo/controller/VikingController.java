@@ -66,4 +66,9 @@ public class VikingController {
     public void deleteViking(@RequestParam int index) {
         vikingListener.delete(index);
     }
+
+    @PutMapping()
+    public void updateViking(@RequestParam int index, @RequestBody Viking viking) {
+        vikingListener.update(index, viking);
+    }
 }

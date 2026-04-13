@@ -10,6 +10,7 @@ import ru.mephi.vikingdemo.gui.VikingDesktopFrame;
 import ru.mephi.vikingdemo.model.BeardStyle;
 import ru.mephi.vikingdemo.model.EquipmentItem;
 import ru.mephi.vikingdemo.model.HairColor;
+import ru.mephi.vikingdemo.model.Viking;
 import ru.mephi.vikingdemo.service.VikingService;
 
 import java.util.List;
@@ -41,6 +42,18 @@ public class VikingListener {
     }
 
     void delete(int index) {
-        gui.removeOldViking(service.removeViking(index));
+        try {
+            gui.removeOldViking(service.removeViking(index));
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    void update(int index, Viking viking) {
+        try {
+            gui.updateOldViking(index, service.updateViking(index, viking));
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }

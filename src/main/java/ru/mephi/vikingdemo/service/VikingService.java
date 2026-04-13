@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class VikingService {
-    // каждый раз при изменении создаётся новая копия списка 
+    // каждый �Ѱз при изменении создаётся новая копия списка 
     private final CopyOnWriteArrayList<Viking> vikings = new CopyOnWriteArrayList<>();
     private final VikingFactory vikingFactory;
     @Autowired
@@ -37,11 +37,19 @@ public class VikingService {
         return viking;
     }
 
-    public int removeViking(int index) {
+    public int removeViking(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= vikings.size()) {
-            throw new IndexOutOfBoundsException("Такого викинга нет");
+            throw new IndexOutOfBoundsException("Такого викинга нет!");
         }
         vikings.remove(index);
         return index;
+    }
+
+    public Viking updateViking(int index, Viking viking) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= vikings.size()) {
+            throw new IndexOutOfBoundsException("Такого викинга нет!");
+        }
+        vikings.set(index, viking);
+        return viking;
     }
 }

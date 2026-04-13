@@ -24,6 +24,11 @@ public class VikingTableModel extends AbstractTableModel {
         fireTableRowsDeleted(index, index);
     }
 
+    public void updateViking(int index, Viking viking) {
+        data.set(index, viking);
+        fireTableRowsUpdated(index, index);
+    }
+
     @Override
     public int getRowCount() {
         return data.size();

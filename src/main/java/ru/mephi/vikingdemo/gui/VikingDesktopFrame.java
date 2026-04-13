@@ -57,4 +57,8 @@ public class VikingDesktopFrame extends JFrame {
     public void removeOldViking(int index) {
         tableModel.removeViking(index);
     }
+
+    public void updateOldViking(int index, Viking viking) {
+        tableModel.updateViking(index, viking);
+    }
 }
