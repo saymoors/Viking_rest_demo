@@ -1,6 +1,9 @@
 package ru.mephi.vikingdemo.service;
 
 import org.springframework.stereotype.Service;
+import ru.mephi.vikingdemo.model.BeardStyle;
+import ru.mephi.vikingdemo.model.EquipmentItem;
+import ru.mephi.vikingdemo.model.HairColor;
 import ru.mephi.vikingdemo.model.Viking;
 
 import java.util.List;
@@ -22,10 +25,16 @@ public class VikingService {
     }
 
     public Viking createRandomViking() {
-        
-
         Viking viking = vikingFactory.createRandomViking();
 
+        vikings.add(viking);
+        return viking;
+    }
+
+    public Viking createViking(String name, int age, int heightCm, HairColor hairColor, BeardStyle beardStyle, List<EquipmentItem> equipment) {
+        System.out.println(0);
+        Viking viking = new Viking(name, age, heightCm, hairColor, beardStyle, equipment);
+        System.out.println(1);
         vikings.add(viking);
         return viking;
     }
