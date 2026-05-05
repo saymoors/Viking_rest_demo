@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ru.mephi.vikingdemo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +11,6 @@ import ru.mephi.vikingdemo.service.VikingService;
 
 import java.util.List;
 
-/**
- *
- * @author test2023
- */
 @Component
 public class VikingListener {
     private VikingService service;
@@ -28,7 +20,7 @@ public class VikingListener {
     public VikingListener(VikingService service) {
         this.service = service;
     }
-    
+
     public void setGui(VikingDesktopFrame gui){
         this.gui = gui;
     }
@@ -54,6 +46,14 @@ public class VikingListener {
             gui.updateOldViking(index, service.updateViking(index, viking));
         } catch (IndexOutOfBoundsException exception) {
             System.out.println(exception.getMessage());
+        }
+    }
+
+    public void addMultipleToGui(List<Viking> vikings) {
+        if (gui != null) {
+            for (Viking v : vikings) {
+                gui.addNewViking(v);
+            }
         }
     }
 }

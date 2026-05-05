@@ -16,13 +16,13 @@ import java.util.List;
 public class VikingController {
 
     private final VikingService vikingService;
-    private VikingListener vikingListener;
+    private final VikingListener vikingListener;
 
     public VikingController(VikingService vikingService, VikingListener vikingListener) {
         this.vikingService = vikingService;
         this.vikingListener = vikingListener;
     }
-    
+
     @GetMapping
     @Operation(summary = "Получить список созданных викингов", operationId = "getAllVikings")
     @ApiResponses({
@@ -42,10 +42,9 @@ public class VikingController {
         System.out.println("GET /api/vikings/test called");
         return List.of("Ragnar", "Bjorn");
     }
-    
+
     @PostMapping("/post")
-    @Operation(summary = "Добавить случайного викинга",
-            operationId = "addRandomViking")
+    @Operation(summary = "Добавить случайного викинга", operationId = "addRandomViking")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Случайный викинг успешно добавлен")
     })
@@ -89,5 +88,17 @@ public class VikingController {
     })
     public void updateViking(@RequestParam int index, @RequestBody Viking viking) {
         vikingListener.update(index, viking);
+    }
+
+    @PostMapping("/generate")
+    @Operation(summary = "Массовая генерация случайных викингов", operationId = "generateVikings")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Викинги успешно сгенерированы"),
+            @ApiResponse(responseCode = "400", description = "Некорректное количество")
+    })
+    public List<Viking> generateVikings(@RequestParam int count) {
+        List<Viking> vikings = vikingService.createMultipleVikings(count);
+        vikingListener.addMultipleToGui(vikings);
+        return vikings;
     }
 }

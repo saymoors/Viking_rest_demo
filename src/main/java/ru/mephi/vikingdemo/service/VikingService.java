@@ -8,27 +8,43 @@ import ru.mephi.vikingdemo.model.Viking;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class VikingService {
-    // каждый �Ѱз при изменении создаётся новая копия списка 
     private final CopyOnWriteArrayList<Viking> vikings = new CopyOnWriteArrayList<>();
     private final VikingFactory vikingFactory;
+
     @Autowired
     public VikingService(VikingFactory vikingFactory) {
         this.vikingFactory = vikingFactory;
     }
-    
+
     public List<Viking> findAll() {
         return List.copyOf(vikings);
     }
 
     public Viking createRandomViking() {
         Viking viking = vikingFactory.createRandomViking();
-
         vikings.add(viking);
         return viking;
+    }
+
+    public List<Viking> createMultipleVikings(int count) {
+        if (count <= 0) {
+            throw new IllegalArgumentException("Количество должно быть положительным");
+        }
+
+        return IntStream.range(0, count)
+                .mapToObj(i -> {
+                    Viking viking = vikingFactory.createRandomViking();
+                    vikings.add(viking);
+                    return viking;
+                })
+                .collect(Collectors.toList());
     }
 
     public Viking createViking(String name, int age, int heightCm, HairColor hairColor, BeardStyle beardStyle, List<EquipmentItem> equipment) {
