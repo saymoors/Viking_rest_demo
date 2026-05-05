@@ -24,8 +24,7 @@ public class VikingController {
     }
     
     @GetMapping
-    @Operation(summary = "Получить список созданных викингов", 
-            operationId = "getAllVikings")
+    @Operation(summary = "Получить список созданных викингов", operationId = "getAllVikings")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Список успешно получен")
     })
@@ -35,8 +34,7 @@ public class VikingController {
     }
 
     @GetMapping("/test")
-    @Operation(summary = "Получить список тестовых викингов", 
-            operationId = "getTest")
+    @Operation(summary = "Получить список тестовых викингов", operationId = "getTest")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Список успешно получен")
     })
@@ -46,11 +44,21 @@ public class VikingController {
     }
     
     @PostMapping("/post")
+    @Operation(summary = "Добавить случайного викинга",
+            operationId = "addRandomViking")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Случайный викинг успешно добавлен")
+    })
     public void addViking(){
         vikingListener.testAdd();
     }
 
     @PostMapping()
+    @Operation(summary = "Добавить конкретного викинга", operationId = "addViking")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Викинг успешно добавлен"),
+            @ApiResponse(responseCode = "400", description = "Некорректные данные викинга")
+    })
     public void addViking(@RequestBody Viking viking) {
         vikingListener.add(
                 viking.name(),
@@ -63,11 +71,22 @@ public class VikingController {
     }
 
     @DeleteMapping()
+    @Operation(summary = "Удалить викинга по индексу", operationId = "deleteViking")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Викинг успешно удалён"),
+            @ApiResponse(responseCode = "404", description = "Викинг с указанным индексом не найден")
+    })
     public void deleteViking(@RequestParam int index) {
         vikingListener.delete(index);
     }
 
     @PutMapping()
+    @Operation(summary = "Обновить параметры викинга по индексу", operationId = "updateViking")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Викинг успешно обновлён"),
+            @ApiResponse(responseCode = "400", description = "Некорректные данные викинга"),
+            @ApiResponse(responseCode = "404", description = "Викинг с указанным индексом не найден")
+    })
     public void updateViking(@RequestParam int index, @RequestBody Viking viking) {
         vikingListener.update(index, viking);
     }
