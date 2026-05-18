@@ -85,7 +85,7 @@ public class VikingAnalysisService {
         List<Viking> vikings = vikingService.findAll();
 
         return vikings.stream()
-                .filter(v -> v.hairColor() == HairColor.Red)
+                .filter(v -> v.hairColor() == HairColor.Red && v.beardStyle() != BeardStyle.CLEAN_SHAVEN)
                 .sorted(Comparator.comparingInt(Viking::age))
                 .collect(Collectors.toList());
     }
