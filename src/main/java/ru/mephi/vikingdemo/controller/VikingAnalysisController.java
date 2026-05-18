@@ -64,15 +64,15 @@ public class VikingAnalysisController {
         );
     }
 
-    @GetMapping("/count/axes")
-    @Operation(summary = "Подсчет викингов с определенным количеством топоров", operationId = "countByAxes")
+    @GetMapping("/count/axes-one-or-two")
+    @Operation(summary = "Подсчет викингов с 1 или 2 топорами", operationId = "countByOneOrTwoAxes")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Результат подсчета")
     })
-    public Map<String, Object> countByAxes(@RequestParam int axeCount) {
-        long count = analysisService.countByAxeCount(axeCount);
+    public Map<String, Object> countByAxes() {
+        long count = analysisService.countByAxeCount();
         return Map.of(
-                "axeCount", axeCount,
+                "description", "Викинги с 1 или 2 топорами",
                 "count", count
         );
     }

@@ -49,11 +49,10 @@ public class VikingAnalysisListener {
                 "Анализ бороды и волос", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void showAxeCount(int axeCount) {
-        long count = analysisService.countByAxeCount(axeCount);
-        String axeText = axeCount == 1 ? "1 топором" : axeCount + " топорами";
+    public void showAxeCount() {
+        long count = analysisService.countByAxeCount();
         JOptionPane.showMessageDialog(gui,
-                "Викингов с " + axeText + ": " + count,
+                "Количество викингов с 1 или 2 топорами: " + count,
                 "Анализ топоров", JOptionPane.INFORMATION_MESSAGE);
     }
 

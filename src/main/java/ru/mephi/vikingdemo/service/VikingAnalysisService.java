@@ -41,15 +41,17 @@ public class VikingAnalysisService {
         return vikings.stream().filter(beardAndHairPredicate).count();
     }
 
-    public long countByAxeCount(int axeCount) {
+    public long countByAxeCount() {
         List<Viking> vikings = vikingService.findAll();
 
-        Predicate<Viking> axePredicate = v ->
-                v.equipment().stream()
-                        .filter(e -> e.name().equalsIgnoreCase("Axe"))
-                        .count() == axeCount;
-
-        return vikings.stream().filter(axePredicate).count();
+        return vikings.stream()
+                .filter(v -> {
+                    long axeCount = v.equipment().stream()
+                            .filter(e -> e.name().equalsIgnoreCase("Axe"))
+                            .count();
+                    return axeCount == 1 || axeCount == 2;
+                })
+                .count();
     }
 
     public Optional<Viking> getRandomTallViking() {

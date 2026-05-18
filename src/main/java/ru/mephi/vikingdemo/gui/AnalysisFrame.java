@@ -30,8 +30,7 @@ public class AnalysisFrame extends JFrame {
         add(createButton("Блондины с длинной бородой", e -> listener.showBeardAndHairCount(BeardStyle.LONG, HairColor.Blond)));
         add(createButton("Шатены с короткой бородой", e -> listener.showBeardAndHairCount(BeardStyle.SHORT, HairColor.Brown)));
 
-        add(createButton("Викинги с 1 топором", e -> listener.showAxeCount(1)));
-        add(createButton("Викинги с 2 топорами", e -> listener.showAxeCount(2)));
+        add(createButton("Викинги с 1 или 2 топорами", e -> listener.showAxeCount()));
 
         add(createButton("Случайный высокий викинг (>180 см)", e -> listener.showRandomTallViking()));
         add(createButton("Викинги с легендарным снаряжением", e -> listener.showLegendaryVikings()));
